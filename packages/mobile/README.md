@@ -1,4 +1,16 @@
-# @e2e-dev/mobile
+---
+title: "@e2e-dev/mobile"
+tags: [e2e, mobile, ios, android, testing, agent-device, engine]
+category: packages
+created: "2024-01-01"
+updated: "2026-10-20"
+source: external
+type: index
+status: stable
+lifecycle: active
+---
+
+# 💡 概述
 
 The mobile engine for [`e2e`](https://www.npmjs.com/package/e2e), built on
 [agent-device](https://github.com/callstack/agent-device): iOS simulators,
@@ -6,7 +18,11 @@ Android emulators, and connected phones through the same `e2e/engine` contract t
 implements. A test written against `screen`, `expect`, `app`, and `agent` runs
 on a device target unchanged; nothing in `e2e` core knows this package exists.
 
-## Install
+---
+
+## 🚀 快速开始
+
+### Install
 
 Run `npx e2e init` and choose **Mobile (iOS/Android)** for a Settings
 example with optional AI testing. Init defaults to iOS on macOS and Android
@@ -79,7 +95,11 @@ Every optional `mobile()` value also accepts `undefined`, so a config passes
 `device: process.env.E2E_DEVICE` straight through, with no conditional
 spread.
 
-## What the engine declares
+---
+
+## ⚡ 功能
+
+### What the engine declares
 
 - **Observation**: the accessibility tree, projected onto the role vocabulary
   (iOS `Button` becomes `button`, `TextField` becomes `textbox`, `Cell` becomes
@@ -103,7 +123,7 @@ spread.
   simulator has no portable session snapshot.
 - **App kind**: a target with `app.bundleId` or `app.appPath` is a `native-app` target, so a portable suite can `requires: ['native-app']`.
 
-## Replay cache
+### Replay cache
 
 The runner caches `agent.act` steps by their location anchor, and a device has
 no address bar. This engine reports one anyway: `<bundle id> / <screen
@@ -117,7 +137,7 @@ the same screen, and
 prefer the grammar over the `open_app` tool inside a step: a tool call is a
 replay gap.
 
-## The `device` fixture
+### The `device` fixture
 
 Deterministic device management, recorded as `device.<method>` steps. Import
 `test` from this package to have it typed.
@@ -157,7 +177,7 @@ the bundle id or package to `openApp` the build by, else the `app` passed in;
 with no reported id and no `app`, it fails with `ENGINE_FAILURE`. `openApp` takes an app id,
 never a link; `openLink` opens one, under the navigation rule.
 
-## Agent tools
+### Agent tools
 
 `@e2e-dev/mobile/tools` exports `mobileTools(...engines)`: `open_app`,
 `swipe` (free-form, in logical pixels), and `alert` (accept or dismiss a
@@ -167,13 +187,42 @@ pack dispatches each call to the engine whose attempt is running. Tools are
 scoped to the platforms of those engines, so a suite that mixes web and device
 targets can hand the pack to one agents entry's `tools`.
 
-## Secrets
+### Secrets
 
 `type_secret` and `screen.getByLabel(...).fill(secret)` fill declared secrets
 on a device: a credential's password into a secure field, a `secrets` entry
 into any editable input. The model never sees the value, and screenshots are
 withheld for the rest of the attempt.
 
-## Documentation
+---
 
-Full documentation lives at [e2e.tester.army/docs](https://e2e.tester.army/docs).
+## ⚙️ 技术栈
+
+- agent-device
+- Node.js
+- Xcode (iOS) / Android SDK (Android)
+
+---
+
+## 📊 指标
+
+「待补充」
+
+---
+
+## 🏛️ 设计
+
+「待补充」
+
+---
+
+## 📁 目录
+
+「待补充」
+
+---
+
+## 🔗 资源
+
+- [Documentation](https://e2e.tester.army/docs)
+- [Physical devices](https://e2e.tester.army/docs/mobile#physical-devices)

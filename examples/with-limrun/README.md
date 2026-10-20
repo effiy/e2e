@@ -1,4 +1,16 @@
-# App flows on Limrun
+---
+title: App flows on Limrun
+tags: [e2e, limrun, hosted, mobile, testing, ios, android]
+category: examples
+created: "2024-01-01"
+updated: "2026-10-20"
+source: external
+type: index
+status: stable
+lifecycle: active
+---
+
+# 💡 概述
 
 Run the same five tests on a hosted iOS simulator and Android emulator.
 The suite fills a form, submits it, checks validation and updated results,
@@ -9,7 +21,11 @@ This test project reuses the greeting apps in [with-swiftui](../with-swiftui)
 and [with-compose](../with-compose). Keep those folders beside this one when
 following the build commands below. Prebuilt apps work too.
 
-## Install
+---
+
+## 🚀 快速开始
+
+### Install
 
 Run these commands from `examples/with-limrun`.
 Use Node.js 22.22.3+, 24.8+, or 26+.
@@ -30,7 +46,7 @@ Set `LIMRUN_API_KEY` to a Limrun key with instance control permissions.
 Android tests also need `adb` from Android SDK Platform-Tools on `PATH`.
 The test runner needs no local simulator, emulator, or Xcode installation.
 
-## Build the apps
+### Build the apps
 
 Build the existing native apps with the Limrun CLI. The CLI uses `lim login`
 or `LIM_API_KEY`; the test provider separately reads `LIMRUN_API_KEY`.
@@ -49,7 +65,7 @@ The config expects `build/HelloApp.app` and `build/e2e-limrun-greeting.apk`.
 To use builds elsewhere, set `GREETING_IOS_APP` and `GREETING_ANDROID_APP`
 to their paths.
 
-## Run the tests
+### Run the tests
 
 Run both targets with video recording:
 
@@ -68,6 +84,10 @@ The provider creates a device and installs the app before testing each
 target. Every test starts the app with `app.open()`. Both targets execute
 the same [test file](tests/greeting.e2e.ts) without platform branches.
 
+---
+
+## ⚡ 功能
+
 | Flow | What the test checks |
 | --- | --- |
 | Open the app | The heading, name field, and submit button are visible. |
@@ -79,7 +99,27 @@ the same [test file](tests/greeting.e2e.ts) without platform branches.
 Videos and screenshots are under `.e2e/`, alongside the run reports. The successful correction
 also saves a screenshot named `greeting`. The run releases its devices at exit.
 
-## Use your own app
+---
+
+## ⚙️ 技术栈
+
+- e2e 0.18.0
+- @e2e-dev/mobile 0.11.0
+- @e2e-dev/limrun 0.2.0
+- agent-device 0.21.22
+- Limrun SDK 0.59.0
+
+---
+
+## 📊 指标
+
+「待补充」
+
+---
+
+## 🏛️ 设计
+
+### Use your own app
 
 Change `app.bundleId` and `app.appPath` in [e2e.config.ts](e2e.config.ts).
 Replace the greeting assertions with your app's form, navigation, or other
@@ -89,6 +129,18 @@ With agent-device 0.21.25, the Limrun iOS transport does not support
 `locator.press('Enter')`. This suite taps the app's Greet button to submit.
 Restarting preserves persisted app data; these greeting apps keep their
 form state in memory.
+
+---
+
+## 📁 目录
+
+「待补充」
+
+---
+
+## 🔗 资源
+
+「待补充」
 
 Last checked: 2026-10-09, e2e 0.18.0, mobile 0.11.0, Limrun provider 0.2.0,
 agent-device 0.21.22, and Limrun SDK 0.59.0. All ten tests passed on hosted

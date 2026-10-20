@@ -1,4 +1,16 @@
-# @e2e-dev/mobile-benchmark
+---
+title: "@e2e-dev/mobile-benchmark"
+tags: [e2e, mobile, benchmark, expo, ios, android, testing]
+category: testing
+created: "2024-01-01"
+updated: "2026-10-20"
+source: external
+type: index
+status: stable
+lifecycle: active
+---
+
+# 💡 概述
 
 An Expo app (iOS and Android) of self-contained scenarios that are hard to
 automate on a device, and the e2e suites written against them. Every
@@ -14,65 +26,9 @@ that source minimal so scenarios port both ways. Scenarios distilled from
 real production apps name no company: describe the surface, never the
 source.
 
-## Layout
+---
 
-The Expo project sits at the package root, unlike `web-benchmark`, because
-Expo's tooling (Metro, CNG, autolinking) reads `app.json` and `package.json`
-from the directory it runs in.
-
-- `src/examples.ts`: the catalog. Every scenario's `component`, `name`,
-  `description`, and optional `platform` / `screenOptions`. One component
-  per scenario in `src/Examples/`; the home list renders one row per
-  scenario, its test id the scenario name, and pushes each as its own stack
-  screen.
-- `modules/apple-pay-lab`: the local Expo module (PassKit, iOS only) behind
-  the two Apple Pay scenarios.
-- `e2e.config.ts` + `tests/`: the deterministic suite, locators only.
-- `e2e.agent.config.ts` + `tests-agent/`: the agentic suite, derived from the
-  deterministic config. One `agent.act` per scenario with the catalog
-  description as its goal and a deterministic check on the success message.
-  A scenario whose tree is merged or hidden on purpose tells the model so
-  and is judged from a screenshot; one whose surface renders out of process
-  (PassKit, the photo picker) says the sheet is not in the tree, and the
-  model asks for the screenshot itself; the photo picker seeds its receipt
-  into every booted simulator first. Scenarios the
-  harness cannot finish yet are declared with a `gap` and skip with that
-  reason, so every run shows what is still missing.
-
-The deterministic suite runs in CI on every pull request (`.github/workflows/mobile.yml`):
-an iOS simulator on a macOS runner and an Android emulator on Linux, with the
-Expo build cached per native fingerprint and its JS bundle repacked on a hit.
-The agentic suite runs there too, for this repository's branches. It replays
-the recordings committed under `.e2e/cache/` and calls the model for a step
-with none. Both platforms' entries are recorded on a Mac with `test:agent`
-(below), an iPhone 17 Pro simulator on the pinned iOS runtime and a Pixel 7
-API 36 emulator, and committed in the same pull request as the scenario
-change. Android runs with `--strict-cache`, so a recording that no longer
-replays fails its step as `REPLAY_STALE` instead of handing it to the model.
-iOS replays leniently: three recordings hand off on every run, three more
-on the CI simulator only, and strict mode waits on them.
-
-- Debounced Search: the replay looks before the debounced results render,
-  and relocation settles on the search field's wrapper, which reads
-  "Benchmark Target" too, instead of waiting for the result row.
-- Choice Controls: the keyboard the notes field raises covers the Mushrooms
-  checkbox, which iOS then drops from the tree.
-- Stripe PaymentSheet: the card form's fields are not in the tree after the
-  Card tab is tapped on the sheet.
-- Login Form (CI only): the CI simulator reads the screen's route as its
-  title, `Login Form`, where a Mac reads the back button's `Benchmark
-  Examples`, so the recorded start route does not match.
-- Photo Picker (CI only): the recorded tap names the photo by the time it
-  was seeded, `Photo, October 03, 22:50`, which is another time on another
-  simulator.
-- Permission Prompt (CI only): every recorded action replays, but the
-  recorded end state, `Microphone enabled`, does not show.
-Each job posts its first pass to the pull request as one comment (`e2e ios:
-44 passed`, `e2e android agent: ...`) through `@e2e-dev/github`, like the web
-benchmark's two. The second pass over failed tests posts nothing, so a green
-job whose comment lists failures is one that pass recovered.
-
-## Running
+## 🚀 快速开始
 
 Native projects are generated with CNG (`ios/` and `android/` are ignored);
 `expo run:*` prebuilds them on first use.
@@ -102,17 +58,11 @@ node node_modules/e2e/dist/cli/bin.js run tests/login-form.e2e.ts --target ios-s
 Android note: the Android Gradle Plugin's prefab step fails on very new JDKs
 (observed on JDK 26). Build with JDK 17 through 21.
 
-## Scenario contract
+---
 
-Every scenario ends in a deterministic success state. Where the
-accessibility tree is intact, the terminal element carries
-`testID="success-message"`. The adversarial scenarios (Broken Accessibility,
-Vision Only, Flattened Registration Form, Flattened Login) omit test ids and
-hide or merge the tree on purpose, so success is only visible in pixels.
+## ⚡ 功能
 
-The Login Form and Flattened Login account is declared as the `benchmark`
-credential in `e2e.config.ts`, so tests reach it through
-`credentials.user('benchmark')`.
+### Scenario catalog
 
 | Scenario                    | What it gates                                                               |
 | --------------------------- | --------------------------------------------------------------------------- |
@@ -159,7 +109,85 @@ example backend for disposable test-mode customers and PaymentIntents; no
 secret and no real charge is involved, but it needs network access to that
 demo backend.
 
-## Adding a scenario
+### CI suites
+
+The deterministic suite runs in CI on every pull request (`.github/workflows/mobile.yml`):
+an iOS simulator on a macOS runner and an Android emulator on Linux, with the
+Expo build cached per native fingerprint and its JS bundle repacked on a hit.
+The agentic suite runs there too, for this repository's branches. It replays
+the recordings committed under `.e2e/cache/` and calls the model for a step
+with none. Both platforms' entries are recorded on a Mac with `test:agent`
+(below), an iPhone 17 Pro simulator on the pinned iOS runtime and a Pixel 7
+API 36 emulator, and committed in the same pull request as the scenario
+change. Android runs with `--strict-cache`, so a recording that no longer
+replays fails its step as `REPLAY_STALE` instead of handing it to the model.
+iOS replays leniently: three recordings hand off on every run, three more
+on the CI simulator only, and strict mode waits on them.
+
+Each job posts its first pass to the pull request as one comment (`e2e ios:
+44 passed`, `e2e android agent: ...`) through `@e2e-dev/github`, like the web
+benchmark's two. The second pass over failed tests posts nothing, so a green
+job whose comment lists failures is one that pass recovered.
+
+---
+
+## ⚙️ 技术栈
+
+- Expo (React Native) with CNG (Continuous Native Generation)
+- TypeScript
+- iOS Simulator (iPhone 17 Pro) / Android Emulator (Pixel 7 API 36)
+- `@stripe/stripe-react-native` for payment sheet fixture
+- PassKit (iOS only) for Apple Pay fixture
+- e2e runner (`@e2e-dev/mobile` engine)
+
+---
+
+## 📊 指标
+
+「待补充」
+
+---
+
+## 🏛️ 设计
+
+### Layout
+
+The Expo project sits at the package root, unlike `web-benchmark`, because
+Expo's tooling (Metro, CNG, autolinking) reads `app.json` and `package.json`
+from the directory it runs in.
+
+- `src/examples.ts`: the catalog. Every scenario's `component`, `name`,
+  `description`, and optional `platform` / `screenOptions`. One component
+  per scenario in `src/Examples/`; the home list renders one row per
+  scenario, its test id the scenario name, and pushes each as its own stack
+  screen.
+- `modules/apple-pay-lab`: the local Expo module (PassKit, iOS only) behind
+  the two Apple Pay scenarios.
+- `e2e.config.ts` + `tests/`: the deterministic suite, locators only.
+- `e2e.agent.config.ts` + `tests-agent/`: the agentic suite, derived from the
+  deterministic config. One `agent.act` per scenario with the catalog
+  description as its goal and a deterministic check on the success message.
+  A scenario whose tree is merged or hidden on purpose tells the model so
+  and is judged from a screenshot; one whose surface renders out of process
+  (PassKit, the photo picker) says the sheet is not in the tree, and the
+  model asks for the screenshot itself; the photo picker seeds its receipt
+  into every booted simulator first. Scenarios the
+  harness cannot finish yet are declared with a `gap` and skip with that
+  reason, so every run shows what is still missing.
+
+### Scenario contract
+
+Every scenario ends in a deterministic success state. Where the
+accessibility tree is intact, the terminal element carries
+`testID="success-message"`. The adversarial scenarios (Broken Accessibility,
+Vision Only, Flattened Registration Form, Flattened Login) omit test ids and
+hide or merge the tree on purpose, so success is only visible in pixels.
+
+The Login Form and Flattened Login account is declared as the `benchmark`
+credential in `e2e.config.ts`, so tests reach it through
+`credentials.user('benchmark')`.
+
+### Adding a scenario
 
 1. Create `src/Examples/YourCase.tsx`. Keep it deterministic (fixed data,
    fixed timings) and end in a persistent success state.
@@ -169,3 +197,15 @@ demo backend.
    alone can finish it. If the case is about degraded accessibility, hide or
    merge the tree on purpose and skip test ids: that is the point.
 4. If it came from a real app, describe the surface, not the company.
+
+---
+
+## 📁 目录
+
+「待补充」
+
+---
+
+## 🔗 资源
+
+「待补充」

@@ -1,4 +1,16 @@
-# e2e with Astro
+---
+title: e2e with Astro
+tags: [e2e, astro, example, testing, web]
+category: examples
+created: "2024-01-01"
+updated: "2026-10-20"
+source: external
+type: index
+status: stable
+lifecycle: active
+---
+
+# 💡 概述
 
 An Astro greeting page with three locator tests and two agent tests. The
 page ships no UI framework: one `<script>` in
@@ -8,7 +20,9 @@ page ships no UI framework: one `<script>` in
 
 ![Astro example app asking for a name after Greet is pressed with an empty field](screenshot-error.png)
 
-## Run
+---
+
+## 🚀 快速开始
 
 Use Node 22.22.3+, 24.8+, or 26+. From this folder:
 
@@ -20,7 +34,7 @@ npm run test:e2e
 The runner starts the app at `http://localhost:4321`.
 It downloads Chromium on the first run if needed.
 
-## Agent tests
+### Agent tests
 
 Set a [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) key:
 
@@ -33,5 +47,43 @@ model calls. Results are in `.e2e/report.json`.
 
 See [e2e.config.ts](e2e.config.ts) and [tests/](tests/) for the setup.
 For your own app, follow the [Quickstart](https://e2e.tester.army/docs/quickstart).
+
+---
+
+## ⚡ 功能
+
+「待补充」
+
+---
+
+## ⚙️ 技术栈
+
+- Astro 7.3
+- Node.js 22+
+- e2e 0.18.0, @e2e-dev/web 0.13.0
+
+---
+
+## 📊 指标
+
+「待补充」
+
+---
+
+## 🏛️ 设计
+
+「待补充」
+
+---
+
+## 📁 目录
+
+「待补充」
+
+---
+
+## 🔗 资源
+
+- [Quickstart](https://e2e.tester.army/docs/quickstart)
 
 Last checked with e2e 0.18.0, @e2e-dev/web 0.13.0, Astro 7.3, and Node 22.

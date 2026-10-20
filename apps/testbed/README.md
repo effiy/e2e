@@ -1,4 +1,16 @@
-# @e2e-dev/testbed
+---
+title: "@e2e-dev/testbed"
+tags: [e2e, testbed, dogfood, playground, testing]
+category: testing
+created: "2024-01-01"
+updated: "2026-10-20"
+source: external
+type: index
+status: stable
+lifecycle: active
+---
+
+# 💡 概述
 
 Dogfood workspace for the [`e2e`](../../packages/e2e) runner: a real project consuming the
 built `e2e` package exactly like a user would, against playground apps we
@@ -6,47 +18,9 @@ control. This is where every runner feature has a deterministic test. Hard UI
 surfaces live in the benchmarks (`web-benchmark`, `mobile-benchmark`), not
 here.
 
-## Layout
+---
 
-- `app/server.mjs` — dependency-free playground app. The runner starts and
-  stops it via the web engine's `command` option. The pages live under
-  `app/pages/` by group, each module exporting its routes and its nav
-  entries: `basics` (home, todos, forms, login/session, dashboard, wizard),
-  `interaction` (network, dialogs, board, pointer pad, iframes), `canvas`
-  (four pixels-only surfaces), `downloads` (a file and a long page), and
-  `controls` (control states, scrolling, the browser fixture's page, the
-  speed counter, about). `app/pages/index.mjs` merges them and
-  `app/layout.mjs` renders the nav from that registry.
-- `app/bug-garden.mjs` — a bookshop with planted defects, for `e2e explore`.
-- `dogfood/server.mjs` — an expense-claims app with a test API, for the
-  executor dogfoods.
-- `e2e.config.ts` + `tests/` — the local suite, gating every PR: queries,
-  actions, polling assertions, sessions (`test.setup` + `session:`), serial
-  groups, routes, dialogs, frames, downloads, uploads, keyboard input,
-  credentials and secrets, plus one file per surface added since: control
-  states and the failure codes (`controls`), pointer coordinates and path
-  swipes (`pointer`), viewport and node scrolling (`scroll`), the `browser`
-  fixture's own verbs (`browser`), and the per-action speed floor (`speed`).
-  `tests/helpers.ts` holds the shared `failure`, `boxOf`, and `centerOf`.
-- `e2e.agent.config.ts` + `tests-agent/` — opt-in agentic suite against the
-  playground: `agent.act` flows, assisted polling, judgments,
-  schema-validated extraction with zod, and the pixel tools on the canvas
-  pages. `e2e.mixed.config.ts` adds the local suite to it for watching the
-  list reporter interleave the two.
-- `e2e.dogfood.config.ts` + `tests-dogfood/` — the built-in agent extended
-  with project tools (seed and reset over the expense app's test API).
-- `e2e.dogfood-brain.config.ts` + `tests-dogfood-brain/` — a hand-rolled
-  `StepExecutor` with its own tools and transport; the engine is never touched.
-- `e2e.dogfood-edge.config.ts` + `tests-dogfood-edge/` — steps expected to
-  conclude blocked or failed; the report, not the exit code, is the output.
-- `e2e.stress.config.ts` + `tests-stress/` — failures, timeouts, skips,
-  flakes, and hostile titles for the reporters.
-- `e2e.explore.config.ts` + `scripts/explore-bench.mjs` — `e2e explore`
-  against the bug garden, and a scorer that runs it across models.
-- `e2e.scratch.config.ts` + `tests-scratch/` — a scratch agent config for
-  one-off investigations with the AI SDK devtools recorder.
-
-## Commands
+## 🚀 快速开始
 
 ```bash
 pnpm --filter e2e build               # the testbed runs the built runner
@@ -62,7 +36,7 @@ pnpm --filter @e2e-dev/testbed test:stress                            # reporter
 The local suite runs in CI on every push. Reports land in `.e2e/report.json`;
 artifacts and trace pages under `.e2e/results/`.
 
-## Agentic suites
+### Agentic suites
 
 `test:agent` and `test:dogfood` spend real model calls, so they never gate a
 PR: they run on the weekly `.github/workflows/agent.yml` schedule, by manual
@@ -102,7 +76,80 @@ database per process, hence `--workers 1`; the `--ai-trace` file names runs
 after the test and step and merges every worker, so use it for anything you
 want to keep or compare.
 
-## Hazards worth knowing
+---
+
+## ⚡ 功能
+
+- Deterministic test suites for every runner feature
+- Agentic test suites with real model calls
+- Dogfood executor tests with project tools
+- Hand-rolled StepExecutor tests
+- Edge case suites for blocked/failed steps
+- Stress tests for reporters
+- `e2e explore` against a bug garden with planted defects
+- Scratch agent config for one-off investigations with AI SDK devtools
+
+---
+
+## ⚙️ 技术栈
+
+- Node.js playground app (dependency-free)
+- e2e runner (built `e2e` package)
+- AI SDK with gateway model provider
+- unbox-ai for trace analysis
+- CI via GitHub Actions
+
+---
+
+## 📊 指标
+
+「待补充」
+
+---
+
+## 🏛️ 设计
+
+### Layout
+
+- `app/server.mjs` — dependency-free playground app. The runner starts and
+  stops it via the web engine's `command` option. The pages live under
+  `app/pages/` by group, each module exporting its routes and its nav
+  entries: `basics` (home, todos, forms, login/session, dashboard, wizard),
+  `interaction` (network, dialogs, board, pointer pad, iframes), `canvas`
+  (four pixels-only surfaces), `downloads` (a file and a long page), and
+  `controls` (control states, scrolling, the browser fixture's page, the
+  speed counter, about). `app/pages/index.mjs` merges them and
+  `app/layout.mjs` renders the nav from that registry.
+- `app/bug-garden.mjs` — a bookshop with planted defects, for `e2e explore`.
+- `dogfood/server.mjs` — an expense-claims app with a test API, for the
+  executor dogfoods.
+- `e2e.config.ts` + `tests/` — the local suite, gating every PR: queries,
+  actions, polling assertions, sessions (`test.setup` + `session:`), serial
+  groups, routes, dialogs, frames, downloads, uploads, keyboard input,
+  credentials and secrets, plus one file per surface added since: control
+  states and the failure codes (`controls`), pointer coordinates and path
+  swipes (`pointer`), viewport and node scrolling (`scroll`), the `browser`
+  fixture's own verbs (`browser`), and the per-action speed floor (`speed`).
+  `tests/helpers.ts` holds the shared `failure`, `boxOf`, and `centerOf`.
+- `e2e.agent.config.ts` + `tests-agent/` — opt-in agentic suite against the
+  playground: `agent.act` flows, assisted polling, judgments,
+  schema-validated extraction with zod, and the pixel tools on the canvas
+  pages. `e2e.mixed.config.ts` adds the local suite to it for watching the
+  list reporter interleave the two.
+- `e2e.dogfood.config.ts` + `tests-dogfood/` — the built-in agent extended
+  with project tools (seed and reset over the expense app's test API).
+- `e2e.dogfood-brain.config.ts` + `tests-dogfood-brain/` — a hand-rolled
+  `StepExecutor` with its own tools and transport; the engine is never touched.
+- `e2e.dogfood-edge.config.ts` + `tests-dogfood-edge/` — steps expected to
+  conclude blocked or failed; the report, not the exit code, is the output.
+- `e2e.stress.config.ts` + `tests-stress/` — failures, timeouts, skips,
+  flakes, and hostile titles for the reporters.
+- `e2e.explore.config.ts` + `scripts/explore-bench.mjs` — `e2e explore`
+  against the bug garden, and a scorer that runs it across models.
+- `e2e.scratch.config.ts` + `tests-scratch/` — a scratch agent config for
+  one-off investigations with the AI SDK devtools recorder.
+
+### Hazards worth knowing
 
 - `fill` on a rich-text host resolves successfully and changes nothing (the
   editor reverts it): a silent no-op only a paired deterministic assertion
@@ -114,3 +161,15 @@ want to keep or compare.
   cannot show recurrence, so assert state, not history.
 - String text matching is **exact by default**, inverting the Playwright and
   Testing-Library default.
+
+---
+
+## 📁 目录
+
+「待补充」
+
+---
+
+## 🔗 资源
+
+- [unbox-ai](https://github.com/tester-army/unbox-ai) — AI trace analysis

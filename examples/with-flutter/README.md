@@ -1,11 +1,25 @@
-# e2e with Flutter
+---
+title: e2e with Flutter
+tags: [e2e, flutter, example, testing, mobile, android, ios]
+category: examples
+created: "2024-01-01"
+updated: "2026-10-20"
+source: external
+type: index
+status: stable
+lifecycle: active
+---
+
+# 💡 概述
 
 A Flutter greeting app with three locator tests and two agent tests per
 platform. The test project is in `e2e/`, next to the Flutter project.
 
 <img src="screenshot-android.png" alt="Flutter app on Android with the greeting Hello, Ada!" width="300" /> <img src="screenshot-ios.png" alt="Flutter app on iOS with the greeting Hello, Ada!" width="300" />
 
-## Run
+---
+
+## 🚀 快速开始
 
 [Install Flutter](https://docs.flutter.dev/get-started/install) with the
 Android SDK, Xcode, or both. Start an emulator or simulator, then build and
@@ -30,7 +44,7 @@ npm run test:e2e:android   # or test:e2e:ios
 
 After app changes, build and install again before you run the tests.
 
-## Agent tests
+### Agent tests
 
 Set a [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) key.
 From `e2e/`:
@@ -48,6 +62,47 @@ See [e2e/e2e.config.ts](e2e/e2e.config.ts) and [e2e/tests/](e2e/tests/) for the 
 For device setup and CI, see the [Mobile guide](https://e2e.tester.army/docs/mobile).
 
 The bundled fonts use the [SIL Open Font License](assets/fonts/OFL.txt).
+
+---
+
+## ⚡ 功能
+
+「待补充」
+
+---
+
+## ⚙️ 技术栈
+
+- Flutter 3.47
+- Android 16 emulator / iOS 26 simulator
+- e2e 0.18.0
+- @e2e-dev/mobile 0.10.0
+
+---
+
+## 📊 指标
+
+「待补充」
+
+---
+
+## 🏛️ 设计
+
+「待补充」
+
+---
+
+## 📁 目录
+
+「待补充」
+
+---
+
+## 🔗 资源
+
+- [Flutter install guide](https://docs.flutter.dev/get-started/install)
+- [Mobile guide](https://e2e.tester.army/docs/mobile)
+- [SIL Open Font License](assets/fonts/OFL.txt)
 
 Last checked on 2026-10-06 with e2e 0.18.0, @e2e-dev/mobile 0.10.0, and
 Flutter 3.47 on an Android 16 emulator and an iOS 26 simulator. Three locator

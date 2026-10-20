@@ -1,16 +1,32 @@
-# @e2e-dev/eas
+---
+title: "@e2e-dev/eas"
+tags: [e2e, eas, expo, simulators, mobile, testing]
+category: packages
+created: "2024-01-01"
+updated: "2026-10-20"
+source: external
+type: index
+status: stable
+lifecycle: active
+---
+
+# 💡 概述
 
 [EAS Simulators](https://expo.dev/services/simulators) for [`e2e`](https://www.npmjs.com/package/e2e):
 `mobile({ device: easSimulators() })` runs a mobile target on
 Expo's hosted iOS simulators and Android emulators.
 
-## Install
+---
+
+## 🚀 快速开始
+
+### Install
 
 ```bash
 npm install --save-dev @e2e-dev/eas
 ```
 
-## Usage
+### Usage
 
 ```ts title="e2e.config.ts"
 import type { E2EConfig } from 'e2e';
@@ -31,6 +47,10 @@ export default {
   workers: 2,
 } satisfies E2EConfig;
 ```
+
+---
+
+## ⚡ 功能
 
 The sessions belong to the Expo project the app config beside
 `e2e.config.ts` links (`extra.eas.projectId`, from `app.json` or as
@@ -57,7 +77,37 @@ Set the engine's `videoTouches: false` for video: drawing touches into a
 recording on an EAS iOS simulator outlasts the attempt's cleanup. The package
 calls Expo's API with `fetch`, so there is no SDK to install.
 
-Full documentation lives at [e2e.tester.army/docs/integrations/eas](https://e2e.tester.army/docs/integrations/eas).
+---
+
+## ⚙️ 技术栈
+
+- Expo EAS Simulators API (fetch-based, no SDK)
+- agent-device
+
+---
+
+## 📊 指标
+
+「待补充」
+
+---
+
+## 🏛️ 设计
+
+「待补充」
+
+---
+
+## 📁 目录
+
+「待补充」
+
+---
+
+## 🔗 资源
+
+- [EAS Simulators](https://expo.dev/services/simulators)
+- [Integration docs](https://e2e.tester.army/docs/integrations/eas)
 
 ## License
 

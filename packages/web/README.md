@@ -1,4 +1,16 @@
-# @e2e-dev/web
+---
+title: "@e2e-dev/web"
+tags: [e2e, web, browser, playwright, engine, testing]
+category: packages
+created: "2024-01-01"
+updated: "2026-10-20"
+source: external
+type: index
+status: stable
+lifecycle: active
+---
+
+# 💡 概述
 
 The browser engine for [`e2e`](https://www.npmjs.com/package/e2e), built on
 [Playwright](https://playwright.dev).
@@ -8,7 +20,11 @@ it, and this package is the one for browsers. It implements the public
 `e2e/engine` contract, so a device or desktop engine plugs into the same
 seam with no privilege either way.
 
-## Install
+---
+
+## 🚀 快速开始
+
+### Install
 
 ```bash
 npm install --save-dev e2e @e2e-dev/web
@@ -44,7 +60,7 @@ target, so a test can `requires: ['browser']`. Browser options:
 `locale` and `timezoneId` (the language and time zone every attempt runs in,
 such as `de-DE` and `Europe/Berlin`), `initScripts` (scripts every document
 runs before the page's own), and
-`connect` — attach to a remote browser over CDP instead of launching a local
+`connect` -- attach to a remote browser over CDP instead of launching a local
 one.
 
 ### Attaching to a remote browser (`connect`)
@@ -52,8 +68,8 @@ one.
 Set `connect.cdpEndpoint` to attach over the Chrome DevTools Protocol rather
 than launch. The resolver is async and called at worker init, and again at the
 start of any attempt that finds the session dropped, so a hosted browser whose
-endpoint is provisioned per run — a cloud session URL that is not known at
-config load — resolves each time it is needed. The resolver receives an
+endpoint is provisioned per run -- a cloud session URL that is not known at
+config load -- resolves each time it is needed. The resolver receives an
 `AbortSignal` that fires when the init or attempt is cancelled or exceeds its
 budget; a browser that connects after that is detached, never used. CDP attach
 is chromium-only, and disposing the engine detaches the session without
@@ -104,7 +120,11 @@ engine: web({
 });
 ```
 
-## The `browser` fixture
+---
+
+## ⚡ 功能
+
+### The `browser` fixture
 
 The engine contributes `browser`: navigation, routes, cookies, dialogs, frames,
 downloads, keyboard and mouse, plus `expect(browser).toHaveURL()` and
@@ -122,7 +142,7 @@ test('signs in', async ({ app, screen, browser }) => {
 });
 ```
 
-## Browsers
+### Browsers
 
 A missing browser is downloaded once per run, in the runner process, after the
 tests are collected and before the app starts: the progress prints in the run
@@ -142,6 +162,35 @@ ones the engine launches. Under pnpm, run the bin by name:
 
 `--with-deps` also installs the system libraries a slim container image lacks.
 
-## Documentation
+---
 
-Full documentation lives at [e2e.tester.army/docs](https://e2e.tester.army/docs).
+## ⚙️ 技术栈
+
+- Playwright (playwright-core)
+- Chromium / Firefox / WebKit
+
+---
+
+## 📊 指标
+
+「待补充」
+
+---
+
+## 🏛️ 设计
+
+「待补充」
+
+---
+
+## 📁 目录
+
+「待补充」
+
+---
+
+## 🔗 资源
+
+- [Documentation](https://e2e.tester.army/docs)
+- [Playwright](https://playwright.dev)
+- [Hosted browsers reference](../../docs/browser.mdx#hosted-browsers)

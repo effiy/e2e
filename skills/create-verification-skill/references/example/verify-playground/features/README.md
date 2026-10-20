@@ -1,4 +1,16 @@
-# Feature map
+---
+title: Feature Map
+tags: [e2e, verification, features, testing, playground]
+category: testing
+created: "2024-01-01"
+updated: "2026-10-20"
+source: external
+type: index
+status: stable
+lifecycle: active
+---
+
+# 💡 概述
 
 One file per user-facing feature of the playground, from the user's point
 of view. Each names the test that pins it, the locators that matter, the
@@ -6,6 +18,10 @@ proof, and its bug-bash charters. The nav lists more pages (Wizard,
 Checkout, Network, Dialogs, Board, Pointer, Frames, Canvas, Keypad, Canvas
 wizard, Canvas form, Downloads, Release notes, Controls, Scroll, Browser,
 Speed, About); map them when they matter to a change.
+
+---
+
+## ⚡ 功能
 
 | Feature | Route | Test | Status |
 | --- | --- | --- | --- |

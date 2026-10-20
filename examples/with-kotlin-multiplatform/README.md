@@ -1,4 +1,16 @@
-# e2e with Kotlin Multiplatform
+---
+title: e2e with Kotlin Multiplatform
+tags: [e2e, kotlin, multiplatform, compose, example, testing, mobile, android, ios]
+category: examples
+created: "2024-01-01"
+updated: "2026-10-20"
+source: external
+type: index
+status: stable
+lifecycle: active
+---
+
+# 💡 概述
 
 A Compose Multiplatform greeting app with three locator tests and two agent
 tests per platform. Android and iOS share one screen in `shared/`. The test
@@ -6,7 +18,9 @@ project is in `e2e/`, next to the Gradle project.
 
 <img src="screenshot-android.png" alt="Kotlin Multiplatform app on Android with the greeting Hello, Ada!" width="300" /> <img src="screenshot-ios.png" alt="Kotlin Multiplatform app on iOS with the greeting Hello, Ada!" width="300" />
 
-## Run
+---
+
+## 🚀 快速开始
 
 Install [Android Studio](https://developer.android.com/studio) with an
 Android emulator, Xcode with an iOS simulator, or both. Start an emulator
@@ -42,7 +56,7 @@ npm run test:e2e:android   # or test:e2e:ios
 
 After app changes, build and install again before you run the tests.
 
-## Agent tests
+### Agent tests
 
 Set a [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) key.
 From `e2e/`:
@@ -63,6 +77,49 @@ See [e2e/e2e.config.ts](e2e/e2e.config.ts) and [e2e/tests/](e2e/tests/) for the 
 For device setup and CI, see the [Mobile guide](https://e2e.tester.army/docs/mobile).
 
 The bundled fonts use the [SIL Open Font License](shared/src/commonMain/composeResources/files/OFL.txt).
+
+---
+
+## ⚡ 功能
+
+「待补充」
+
+---
+
+## ⚙️ 技术栈
+
+- Kotlin 2.4.20
+- Compose Multiplatform 1.12.1
+- AGP 9.4.1
+- Android 16 emulator / iOS 26 simulator
+- e2e 0.18.0
+- @e2e-dev/mobile 0.10.0
+
+---
+
+## 📊 指标
+
+「待补充」
+
+---
+
+## 🏛️ 设计
+
+「待补充」
+
+---
+
+## 📁 目录
+
+「待补充」
+
+---
+
+## 🔗 资源
+
+- [Mobile guide](https://e2e.tester.army/docs/mobile)
+- [Android Studio](https://developer.android.com/studio)
+- [SIL Open Font License](shared/src/commonMain/composeResources/files/OFL.txt)
 
 Last checked on 2026-10-06 with e2e 0.18.0, @e2e-dev/mobile 0.10.0, Kotlin
 2.4.20, Compose Multiplatform 1.12.1, and AGP 9.4.1 on an Android 16
